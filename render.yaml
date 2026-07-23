@@ -1,0 +1,12 @@
+services:
+  # Web Service for Spring Boot Application
+  - type: web
+    name: weather-app-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: WEATHER_API_KEY
+        sync: false

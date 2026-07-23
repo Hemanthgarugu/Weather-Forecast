@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmosphere | Next-Gen Weather Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="weather-clear">
+    <!-- Dynamic Ambient Background Overlay -->
+    <div class="ambient-glow"></div>
+    <div class="particles-container" id="particles"></div>
+
+    <div class="app-wrapper">
+        <!-- Top Header Navigation -->
+        <header class="glass-nav">
+            <div class="brand">
+                <i class="fa-solid fa-cloud-sun-rain brand-icon"></i>
+                <span class="brand-name">ATMOSPHERE</span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="cityInput" placeholder="Search any city globally..." autocomplete="off">
+                <button id="searchBtn" class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <!-- Quick Action & Auth Links -->
+            <div class="nav-actions">
+                <button class="unit-toggle" id="unitToggle" title="Toggle °C / °F">
+                    <span class="unit active" id="unitC">°C</span>
+                    <span class="divider">|</span>
+                    <span class="unit" id="unitF">°F</span>
+                </button>
+                <div class="auth-box" id="authBox">
+                    <button class="btn-primary" id="openAuthModalBtn">
+                        <i class="fa-solid fa-user-lock"></i> Login / Register
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard-grid">
+            <!-- Left Panel: Current Main Weather Card -->
+            <section class="current-weather-card glass-panel">
+                <div class="card-header-meta">
+                    <div class="location-info">
+                        <h1 id="cityName">London</h1>
+                        <span id="countryCode" class="country-pill">GB</span>
+                    </div>
+                    <button id="favoriteBtn" class="fav-heart-btn" title="Add to Favorite Cities">
+                        <i class="fa-regular fa-heart" id="favHeartIcon"></i>
+                    </button>
+                </div>
+
+                <div class="weather-hero">
+                    <div class="hero-temp-wrapper">
+                        <span id="currentTemp" class="hero-temp">18</span>
+                        <span class="temp-unit-symbol">°</span>
+                    </div>
+                    <div class="weather-visual">
+                        <div class="weather-icon-large" id="weatherIconContainer">
+                            <i class="fa-solid fa-sun icon-sun"></i>
+                        </div>
+                        <div class="weather-text-desc" id="weatherDesc">Clear Sky</div>
+                    </div>
+                </div>
+
+                <div class="hi-low-bar">
+                    <span>High: <strong id="tempMax">22°</strong></span>
+                    <span class="dot-separator">•</span>
+                    <span>Low: <strong id="tempMin">14°</strong></span>
+                    <span class="dot-separator">•</span>
+                    <span>Feels Like: <strong id="feelsLike">17°</strong></span>
+                </div>
+
+                <!-- Favorite Cities Quick Bar -->
+                <div class="favorites-section">
+                    <div class="fav-title"><i class="fa-solid fa-star"></i> Saved Cities</div>
+                    <div class="fav-chips-container" id="favoritesChips">
+                        <span class="chip-placeholder">Login to save your favorite cities</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Weather Details & Metrics Grid -->
+            <section class="metrics-section">
+                <!-- 6 Metric Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon"><i class="fa-solid fa-wind"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-label">Wind Speed</span>
+                            <span class="metric-value" id="windSpeed">12 <small>km/h</small></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon"><i class="fa-solid fa-droplet"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-label">Humidity</span>
+                            <span class="metric-value" id="humidity">65<small>%</small></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-label">Pressure</span>
+                            <span class="metric-value" id="pressure">1014 <small>hPa</small></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon"><i class="fa-solid fa-sun"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-label">UV Index</span>
+                            <span class="metric-value" id="uvIndex">5 <small class="uv-level">Moderate</small></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon"><i class="fa-solid fa-smog"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-label">Air Quality</span>
+                            <span class="metric-value" id="aqi">Good <small class="aqi-badge">AQI 2</small></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon"><i class="fa-solid fa-eye"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-label">Visibility</span>
+                            <span class="metric-value" id="visibility">10 <small>km</small></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-Day Forecast Section -->
+                <div class="forecast-section glass-panel">
+                    <h3 class="forecast-heading"><i class="fa-regular fa-calendar-days"></i> 5-Day Weather Forecast</h3>
+                    <div class="forecast-cards-wrapper" id="forecastContainer">
+                        <!-- Dynamic Forecast Days -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Auth Modal (Login & Sign Up) -->
+    <div class="modal-backdrop hidden" id="authModal">
+        <div class="modal-content glass-panel">
+            <button class="modal-close" id="closeAuthModalBtn">&times;</button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" id="tabLoginBtn">Login</button>
+                <button class="tab-btn" id="tabRegisterBtn">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Log in to sync favorites & search history</p>
+                
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" id="loginUsername" placeholder="e.g. johndoe" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-key"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <div class="error-banner hidden" id="loginError"></div>
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form hidden">
+                <h2>Create Account</h2>
+                <p class="subtitle">Unlock saved cities & REST API JWT tokens</p>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" id="regUsername" placeholder="e.g. johndoe" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-envelope"></i> Email</label>
+                    <input type="email" id="regEmail" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-key"></i> Password</label>
+                    <input type="password" id="regPassword" placeholder="Minimum 6 characters" required minlength="6">
+                </div>
+                <div class="error-banner hidden" id="registerError"></div>
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

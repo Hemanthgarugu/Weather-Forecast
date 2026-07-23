@@ -34,19 +34,49 @@ A production-ready, full-stack **Weather Application** built with **Java 17 (Cor
 ---
 
 ## ⚡ Quick Start Options
-
 ### Option A: Run directly in your IDE (IntelliJ IDEA / Eclipse / VS Code) - Recommended!
-1. Open **IntelliJ IDEA**, **Eclipse**, or **VS Code**.
-2. Open the project folder `C:\Users\kotes\.gemini\antigravity\scratch\weather-app`.
-3. Right-click [`WeatherApplication.java`](file:///C:/Users/kotes/.gemini/antigravity/scratch/weather-app/src/main/java/com/weatherapp/WeatherApplication.java) and click **Run 'WeatherApplication'**.
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Hemanthgarugu/Weather-Forecast.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd Weather-Forecast
+```
+
+3. Open the project in **IntelliJ IDEA**, **Eclipse**, or **VS Code**.
+
+4. Wait for Maven to download all dependencies.
+
+5. Run the main class:
+
+```
+WeatherApplication.java
+```
+
+6. Open your browser and visit:
+
+- 🌐 Application: `http://localhost:8080`
+- 📖 Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
 ### Option B: Run via Terminal (Maven Wrapper)
-In PowerShell or Command Prompt inside the project directory:
 
-```powershell
+Open PowerShell, Command Prompt, or Git Bash inside the project folder and run:
+
+```bash
 .\mvnw.cmd spring-boot:run
+```
+
+For Linux/macOS:
+
+```bash
+./mvnw spring-boot:run
 ```
 
 *(Or if you have Maven installed on your system PATH: `mvn spring-boot:run`)*
